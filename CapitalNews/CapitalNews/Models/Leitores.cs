@@ -43,6 +43,14 @@ namespace CapitalNews.Models
         [Required]
         public DateTime Datanasc { get; set; }
 
+        /// <summary>
+        /// Sexo do Leitor 
+        /// Ff - feminino; Mm - masculino
+        /// </summary>
+        [StringLength(1, ErrorMessage = "O {0} só aceita um caráter.")]
+        [RegularExpression("[FfMm]", ErrorMessage = "No {0} só se aceitam as letras F ou M.")]
+        public string Sexo { get; set; }
+
 
         public string Fotolei { get; set; }
 
