@@ -1,4 +1,4 @@
-﻿@model CapitalNews.Models.Leitores
+﻿@model CapitalNews.Models.Jornalistas
 
 @{
     ViewData["Title"] = "Create";
@@ -6,7 +6,7 @@
 
 <h1>Create</h1>
 
-<h4>Leitores</h4>
+<h4>Jornalistas</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -23,24 +23,9 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Datanasc" class="control-label"></label>
-                <input asp-for="Datanasc" class="form-control" />
-                <span asp-validation-for="Datanasc" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Sexo" class="control-label"></label>
-                <input asp-for="Sexo" class="form-control" />
-                <span asp-validation-for="Sexo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Fotolei" class="control-label"></label>
-                <input asp-for="Fotolei" class="form-control" />
-                <span asp-validation-for="Fotolei" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
+                <label asp-for="Fotojor" class="control-label"></label>
+                <input asp-for="Fotojor" class="form-control" />
+                <span asp-validation-for="Fotojor" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

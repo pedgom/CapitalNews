@@ -51,9 +51,15 @@ namespace CapitalNews.Models
         [RegularExpression("[FfMm]", ErrorMessage = "No {0} só se aceitam as letras F ou M.")]
         public string Sexo { get; set; }
 
-
+        /// <summary>
+        /// Nome do ficheiro que contém a foto do Leitor
+        /// </summary>
         public string Fotolei { get; set; }
 
+
+        /// <summary>
+        /// Username do Leitor
+        /// </summary>
         public string Username { get; set; }
 
         /// <summary>

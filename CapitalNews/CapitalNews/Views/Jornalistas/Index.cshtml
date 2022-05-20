@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CapitalNews.Models.Leitores>
+﻿@model IEnumerable<CapitalNews.Models.Jornalistas>
 
 @{
     ViewData["Title"] = "Index";
@@ -19,16 +19,7 @@
                 @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Datanasc)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sexo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fotolei)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Username)
+                @Html.DisplayNameFor(model => model.Fotojor)
             </th>
             <th></th>
         </tr>
@@ -43,16 +34,7 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Datanasc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sexo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fotolei)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Username)
+                @Html.DisplayFor(modelItem => item.Fotojor)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
