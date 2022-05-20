@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Lista dos Jornalistas</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Adicionar Jornalista</a>
 </p>
 <table class="table">
     <thead>
@@ -33,9 +33,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fotojor)
-            </td>
+             <td>
+                    <a href="~/Fotos/@item.Fotojor" target="_blank">
+                        <img src="~/Fotos/@Html.DisplayFor(modelItem => item.Fotojor)"
+                         alt="Foto do(a) jornalista @item.Nome"
+                         title="@item.Nome"
+                         height="50" />
+                    </a>
+                </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
