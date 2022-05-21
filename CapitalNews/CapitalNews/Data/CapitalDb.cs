@@ -41,6 +41,69 @@ namespace CapitalNews.Data
                    Email = "ricardo@gmail.com",
                    Fotojor = "Ricardo.jpg"
                }
+
+              
+
+            );
+
+            modelBuilder.Entity<Categorias>().HasData(
+                 new Categorias()
+                 {
+                     Id = 1,
+                     CategoriaNome = "País"
+
+                 },
+
+               new Categorias()
+               {
+                   Id = 2,
+                   CategoriaNome = "Mundo"
+
+               },
+
+               new Categorias()
+               {
+                   Id = 3,
+                   CategoriaNome = "Economia"
+
+               },
+
+               new Categorias()
+               {
+                   Id = 4,
+                   CategoriaNome = "Desporto"
+
+               },
+
+               new Categorias()
+               {
+                   Id = 5,
+                   CategoriaNome = "Cultura"
+
+               },
+
+               new Categorias()
+               {
+                   Id = 6,
+                   CategoriaNome = "Política"
+
+               },
+
+               new Categorias()
+               {
+                   Id = 7,
+                   CategoriaNome = "Tecnologia"
+
+               },
+
+               new Categorias()
+               {
+                   Id = 8,
+                   CategoriaNome = "Auto"
+
+               }
+
+
             );
 
         }
