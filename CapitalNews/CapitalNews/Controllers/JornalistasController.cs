@@ -30,7 +30,7 @@ namespace CapitalNews.Controllers
         // GET: Jornalistas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Jornalistas == null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -60,7 +60,7 @@ namespace CapitalNews.Controllers
         {
             if( fotoJornalista == null)
             {
-                jornalista.Fotojor = "noJornalista.png";
+                jornalista.Fotojor = "noJornalista.jpg";
             }
             else
             {
@@ -124,17 +124,20 @@ namespace CapitalNews.Controllers
         // GET: Jornalistas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Jornalistas == null)
+            if (id == null )
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
 
-            var jornalistas = await _context.Jornalistas.FindAsync(id);
-            if (jornalistas == null)
+            var jornalista = await _context.Jornalistas.FindAsync(id);
+            if (jornalista == null)
             {
-                return NotFound();
+                return RedirectToAction("Index");
+
             }
-            return View(jornalistas);
+
+            HttpContext.Session.SetInt32("JornalistaID", jornalista.Id);
+            return View(jornalista);
         }
 
         // POST: Jornalistas/Edit/5
@@ -148,6 +151,23 @@ namespace CapitalNews.Controllers
             {
                 return NotFound();
             }
+
+            var idJornalista = HttpContext.Session.GetInt32("JornalistaID");
+
+            if (idJornalista == null)
+            {
+                
+                ModelState.AddModelError("", "Demorou demasiado tempo a executar a tarefa de edição");
+                return View(jornalista);
+            }
+
+           
+            if (idJornalista != jornalista.Id)
+            {
+                
+                return RedirectToAction("Index");
+            }
+
 
             if (ModelState.IsValid)
             {
@@ -175,7 +195,7 @@ namespace CapitalNews.Controllers
         // GET: Jornalistas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Jornalistas == null)
+            if (id == null)
             {
                 return NotFound();
             }
