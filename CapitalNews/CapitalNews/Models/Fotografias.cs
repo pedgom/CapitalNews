@@ -14,7 +14,7 @@ namespace CapitalNews.Models
         public int Id { get; set; }
 
 
-        public string Fotografia { get; set; }
+        public string FotoNoticia { get; set; }
 
 
 
