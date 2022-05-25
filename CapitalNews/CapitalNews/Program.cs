@@ -12,6 +12,15 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<CapitalDb>();
+
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options => {
+    options.IdleTimeout = TimeSpan.FromSeconds(120);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+}
+   );
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -32,6 +41,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthentication();
 app.UseAuthorization();

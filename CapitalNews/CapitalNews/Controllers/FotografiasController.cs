@@ -13,10 +13,12 @@ namespace CapitalNews.Controllers
     public class FotografiasController : Controller
     {
         private readonly CapitalDb _context;
+        private readonly IWebHostEnvironment _caminho;
 
-        public FotografiasController(CapitalDb context)
+        public FotografiasController(CapitalDb context, IWebHostEnvironment caminho)
         {
             _context = context;
+            _caminho = caminho;
         }
 
         // GET: Fotografias
@@ -28,7 +30,7 @@ namespace CapitalNews.Controllers
         // GET: Fotografias/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Fotografias == null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -54,31 +56,85 @@ namespace CapitalNews.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NomeFoto,FotoNoticia")] Fotografias fotografias)
+        public async Task<IActionResult> Create([Bind("Id,NomeFoto,FotoNoticia")] Fotografias fotografia, IFormFile fotos)
         {
+            if (fotos == null)
+            {
+                fotografia.FotoNoticia = "noJornalista.jpg";
+            }
+            else
+            {
+                if (!(fotos.ContentType == "image/png" || fotos.ContentType == "image/jpeg"))
+                {
+                   
+                    ModelState.AddModelError("", "Por favor, adicione um ficheiro .png ou .jpg");
+                   
+                    return View(fotografia);
+                }
+                else
+                {
+                   
+                    Guid g = Guid.NewGuid();
+                    string nomeFoto = g.ToString();
+                    string extensaoFoto = Path.GetExtension(fotos.FileName).ToLower();
+                    nomeFoto += extensaoFoto;
+                    fotografia.FotoNoticia = nomeFoto;
+                }
+            }
+
+
             if (ModelState.IsValid)
             {
-                _context.Add(fotografias);
-                await _context.SaveChangesAsync();
+                try
+                {
+                    _context.Add(fotografia);
+                    await _context.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Ocorreu um erro com a operação de guardar os dados da Foto " + fotografia.NomeFoto);
+                    return View(fotografia);
+                }
+                if (fotos != null)
+                {
+                    
+                    string nomeLocalizacaoFicheiro = _caminho.WebRootPath;
+                    nomeLocalizacaoFicheiro = Path.Combine(nomeLocalizacaoFicheiro, "Fotos");
+               
+                    if (!Directory.Exists(nomeLocalizacaoFicheiro))
+                    {
+                        Directory.CreateDirectory(nomeLocalizacaoFicheiro);
+                    }
+  
+                    string nomeDaFoto = Path.Combine(nomeLocalizacaoFicheiro, fotografia.FotoNoticia);
+                   
+                    using var stream = new FileStream(nomeDaFoto, FileMode.Create);
+                 
+                    await fotos.CopyToAsync(stream);
+                }
+
+               
                 return RedirectToAction(nameof(Index));
             }
-            return View(fotografias);
+            return View(fotografia);
         }
 
         // GET: Fotografias/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Fotografias == null)
+            if (id == null)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
 
-            var fotografias = await _context.Fotografias.FindAsync(id);
-            if (fotografias == null)
+            var fotografia = await _context.Fotografias.FindAsync(id);
+            if (fotografia == null)
             {
-                return NotFound();
+                return RedirectToAction("Index");
             }
-            return View(fotografias);
+
+            HttpContext.Session.SetInt32("FotoID", fotografia.Id);
+            return View(fotografia);
         }
 
         // POST: Fotografias/Edit/5
@@ -86,23 +142,37 @@ namespace CapitalNews.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NomeFoto,FotoNoticia")] Fotografias fotografias)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NomeFoto,FotoNoticia")] Fotografias fotografia, IFormFile fotos)
         {
-            if (id != fotografias.Id)
+            if (id != fotografia.Id)
             {
                 return NotFound();
+            }
+
+            var idFotoNoticia = HttpContext.Session.GetInt32("FotoID");
+
+            if (idFotoNoticia == null)
+            {
+                
+                ModelState.AddModelError("", "Demorou demasiado tempo a executar a tarefa de edição");
+                return View(fotografia);
+            }
+
+            if (idFotoNoticia != fotografia.Id)
+            {
+                return RedirectToAction("Index");
             }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(fotografias);
+                    _context.Update(fotografia);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FotografiasExists(fotografias.Id))
+                    if (!FotografiasExists(fotografia.Id))
                     {
                         return NotFound();
                     }
@@ -113,7 +183,7 @@ namespace CapitalNews.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(fotografias);
+            return View(fotografia);
         }
 
         // GET: Fotografias/Delete/5
@@ -139,20 +209,20 @@ namespace CapitalNews.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Fotografias == null)
+            try
             {
-                return Problem("Entity set 'CapitalDb.Fotografias'  is null.");
+                var fotografia = await _context.Fotografias.FindAsync(id);
+                _context.Fotografias.Remove(fotografia);
+                await _context.SaveChangesAsync();
             }
-            var fotografias = await _context.Fotografias.FindAsync(id);
-            if (fotografias != null)
+            catch (Exception)
             {
-                _context.Fotografias.Remove(fotografias);
+               
             }
-            
-            await _context.SaveChangesAsync();
+
+
             return RedirectToAction(nameof(Index));
         }
-
         private bool FotografiasExists(int id)
         {
           return _context.Fotografias.Any(e => e.Id == id);
