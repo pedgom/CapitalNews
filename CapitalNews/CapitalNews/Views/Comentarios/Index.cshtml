@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CapitalNews.Models.Noticias>
+﻿@model IEnumerable<CapitalNews.Models.Comentarios>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,19 +13,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Titulo)
+                @Html.DisplayNameFor(model => model.TextoComentario)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Body)
+                @Html.DisplayNameFor(model => model.DataComentario)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Data)
+                @Html.DisplayNameFor(model => model.Visibilidade)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Categoria)
+                @Html.DisplayNameFor(model => model.Noticia)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ListaFotografias)
+                @Html.DisplayNameFor(model => model.Leitor)
             </th>
             <th></th>
         </tr>
@@ -34,22 +34,20 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Titulo)
+                @Html.DisplayFor(modelItem => item.TextoComentario)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Body)
+                @Html.DisplayFor(modelItem => item.DataComentario)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Data)
+                @Html.DisplayFor(modelItem => item.Visibilidade)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Categoria.Id)
+                @Html.DisplayFor(modelItem => item.Noticia.Id)
             </td>
-             <td>
-                @Html.DisplayFor(modelItem => item.ListaFotografias)
+            <td>
+                @Html.DisplayFor(modelItem => item.Leitor.Nome)
             </td>
-
-
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
