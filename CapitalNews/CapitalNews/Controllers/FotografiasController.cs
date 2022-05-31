@@ -56,11 +56,11 @@ namespace CapitalNews.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NomeFoto,FotoNoticia")] Fotografias fotografia, IFormFile fotos)
+        public async Task<IActionResult> Create([Bind("Id,NomeFoto,Descritores")] Fotografias fotografia, IFormFile fotos)
         {
             if (fotos == null)
             {
-                fotografia.FotoNoticia = "noJornalista.jpg";
+                fotografia.NomeFoto = "noJornalista.jpg";
             }
             else
             {
@@ -78,7 +78,7 @@ namespace CapitalNews.Controllers
                     string nomeFoto = g.ToString();
                     string extensaoFoto = Path.GetExtension(fotos.FileName).ToLower();
                     nomeFoto += extensaoFoto;
-                    fotografia.FotoNoticia = nomeFoto;
+                    fotografia.NomeFoto = nomeFoto;
                 }
             }
 
@@ -92,7 +92,7 @@ namespace CapitalNews.Controllers
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError("", "Ocorreu um erro com a operação de guardar os dados da Foto " + fotografia.NomeFoto);
+                    ModelState.AddModelError("", "Ocorreu um erro com a operação de guardar os dados da Foto " + fotografia.Descritores);
                     return View(fotografia);
                 }
                 if (fotos != null)
@@ -106,7 +106,7 @@ namespace CapitalNews.Controllers
                         Directory.CreateDirectory(nomeLocalizacaoFicheiro);
                     }
   
-                    string nomeDaFoto = Path.Combine(nomeLocalizacaoFicheiro, fotografia.FotoNoticia);
+                    string nomeDaFoto = Path.Combine(nomeLocalizacaoFicheiro, fotografia.NomeFoto);
                    
                     using var stream = new FileStream(nomeDaFoto, FileMode.Create);
                  
@@ -142,7 +142,7 @@ namespace CapitalNews.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NomeFoto,FotoNoticia")] Fotografias fotografia, IFormFile fotos)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NomeFoto,Descritores")] Fotografias fotografia, IFormFile fotos)
         {
             if (id != fotografia.Id)
             {

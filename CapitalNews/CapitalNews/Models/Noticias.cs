@@ -9,7 +9,7 @@ namespace CapitalNews.Models
         {
             ListaComentarios = new HashSet<Comentarios>();
             ListaJornalistas = new HashSet<JornalistasNoticias>();
-            ListaFotografias = new HashSet<FotografiasNoticias>();
+            ListaFotografias = new HashSet<Fotografias>();
         }
 
         [Key]
@@ -29,7 +29,7 @@ namespace CapitalNews.Models
 
         public virtual ICollection<Comentarios> ListaComentarios { get; set; }
         public virtual ICollection<JornalistasNoticias> ListaJornalistas { get; set; }
-        public virtual ICollection<FotografiasNoticias> ListaFotografias { get; set; }
+        public virtual ICollection<Fotografias> ListaFotografias { get; set; }
 
     }
 }

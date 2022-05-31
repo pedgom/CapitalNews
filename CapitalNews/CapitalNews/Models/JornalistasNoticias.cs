@@ -18,5 +18,9 @@ namespace CapitalNews.Models
         public int JornalistaFK { get; set; }
         [ForeignKey(nameof(JornalistaFK))]
         public Jornalistas Jornalista { get; set; }
+
+
+
+        public string Funcao { get; set; }
     }
 }

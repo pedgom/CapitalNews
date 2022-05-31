@@ -112,7 +112,7 @@ namespace CapitalNews.Data
         public DbSet<Categorias> Categorias { get; set; }
         public DbSet<Comentarios> Comentarios { get; set; }
         public DbSet<Fotografias> Fotografias { get; set; }
-        public DbSet<FotografiasNoticias> FotografiasNoticias { get; set; }
+      //  public DbSet<FotografiasNoticias> FotografiasNoticias { get; set; }
         public DbSet<Jornalistas> Jornalistas { get; set; }
         public DbSet<JornalistasNoticias> JornalistasNoticias { get; set; }
         public DbSet<Leitores> Leitores { get; set; }

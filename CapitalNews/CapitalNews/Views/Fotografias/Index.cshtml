@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.NomeFoto)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FotoNoticia)
+                @Html.DisplayNameFor(model => model.Descritores)
             </th>
             <th></th>
         </tr>
@@ -28,10 +28,10 @@
                 @Html.DisplayFor(modelItem => item.NomeFoto)
             </td>
             <td>
-                    <a href="~/Fotos/@item.FotoNoticia" target="_blank">
-                        <img src="~/Fotos/@Html.DisplayFor(modelItem => item.FotoNoticia)"
-                         alt="Foto sobre @item.NomeFoto"
-                         title="@item.NomeFoto"
+                    <a href="~/Fotos/@item.NomeFoto" target="_blank">
+                        <img src="~/Fotos/@Html.DisplayFor(modelItem => item.NomeFoto)"
+                         alt="Foto sobre @item.Descritores"
+                         title="@item.Descritores"
                          height="50" />
                     </a>
                 </td>

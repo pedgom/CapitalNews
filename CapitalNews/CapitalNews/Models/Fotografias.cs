@@ -7,17 +7,17 @@ namespace CapitalNews.Models
     {
         public Fotografias()
         {
-            ListaNoticias = new HashSet<FotografiasNoticias>();
+            ListaNoticias = new HashSet<Noticias>();
         }
 
         [Key]
         public int Id { get; set; }
 
         public string NomeFoto { get; set; }
-        public string FotoNoticia { get; set; }
+        public string Descritores { get; set; }
 
 
 
-        public virtual ICollection<FotografiasNoticias> ListaNoticias { get; set; }
+        public virtual ICollection<Noticias> ListaNoticias { get; set; }
     }
 }
