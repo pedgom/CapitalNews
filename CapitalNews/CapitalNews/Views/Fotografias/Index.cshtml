@@ -1,0 +1,46 @@
+﻿@model IEnumerable<CapitalNews.Models.Fotografias>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Lista de Fotos de Notícias</h1>
+
+<p>
+    <a asp-action="Create">Adicionar Fotografias</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Descritores)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeFoto)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descritores)
+            </td>
+            <td>
+                    <a href="~/Fotos/@item.NomeFoto" target="_blank">
+                        <img src="~/Fotos/@Html.DisplayFor(modelItem => item.NomeFoto)"
+                         alt="Foto sobre @item.Descritores"
+                         title="@item.Descritores"
+                         height="50" />
+                    </a>
+                </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
