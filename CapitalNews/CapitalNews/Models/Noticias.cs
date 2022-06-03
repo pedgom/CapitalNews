@@ -8,8 +8,7 @@ namespace CapitalNews.Models
         public Noticias()
         {
             ListaComentarios = new HashSet<Comentarios>();
-            ListaJornalistas = new HashSet<JornalistasNoticias>();
-            ListaFotografias = new HashSet<Fotografias>();
+           
         }
 
         [Key]
@@ -27,9 +26,16 @@ namespace CapitalNews.Models
         [ForeignKey(nameof(CategoriaFK))]
         public Categorias Categoria { get; set; }
 
+        public int JornalistaFK { get; set; }
+        [ForeignKey(nameof(JornalistaFK))]
+        public Jornalistas Jornalista { get; set; }
+
+        public int FotografiaFK { get; set; }
+        [ForeignKey(nameof(FotografiaFK))]
+        public Fotografias Fotografia { get; set; }
+
         public virtual ICollection<Comentarios> ListaComentarios { get; set; }
-        public virtual ICollection<JornalistasNoticias> ListaJornalistas { get; set; }
-        public virtual ICollection<Fotografias> ListaFotografias { get; set; }
+        
 
     }
 }

@@ -6,7 +6,7 @@ namespace CapitalNews.Models
     {
         public Jornalistas()
         {
-            ListaNoticias = new HashSet<JornalistasNoticias>();
+            ListaNoticias = new HashSet<Noticias>();
         }
 
 
@@ -37,6 +37,6 @@ namespace CapitalNews.Models
         /// <summary>
         /// Lista de Noticias postadas pelo Jornalistas
         /// </summary>
-        public virtual ICollection<JornalistasNoticias> ListaNoticias { get; set; }
+        public virtual ICollection<Noticias> ListaNoticias { get; set; }
     }
 }
