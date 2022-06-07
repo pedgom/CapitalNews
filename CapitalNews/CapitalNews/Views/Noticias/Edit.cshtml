@@ -1,0 +1,59 @@
+﻿@model CapitalNews.Models.Noticias
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Noticias</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Titulo" class="control-label"></label>
+                <input asp-for="Titulo" class="form-control" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Body" class="control-label"></label>
+                <input asp-for="Body" class="form-control" />
+                <span asp-validation-for="Body" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Data" class="control-label"></label>
+                <input asp-for="Data" class="form-control" />
+                <span asp-validation-for="Data" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoriaFK" class="control-label"></label>
+                <select asp-for="CategoriaFK" class="form-control" asp-items="ViewBag.CategoriaFK"></select>
+                <span asp-validation-for="CategoriaFK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JornalistaFK" class="control-label"></label>
+                <select asp-for="JornalistaFK" class="form-control" asp-items="ViewBag.JornalistaFK"></select>
+                <span asp-validation-for="JornalistaFK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FotografiaFK" class="control-label"></label>
+                <select asp-for="FotografiaFK" class="form-control" asp-items="ViewBag.FotografiaFK"></select>
+                <span asp-validation-for="FotografiaFK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
