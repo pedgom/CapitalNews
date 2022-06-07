@@ -34,11 +34,20 @@ namespace CapitalNews.Controllers
                 return NotFound();
             }
 
+
+
+            
             var noticias = await _context.Noticias
                 .Include(n => n.Categoria)
                 .Include(n => n.Fotografia)
                 .Include(n => n.Jornalista)
+                .Include(r => r.ListaComentarios).Where(c => c.Id == id)
+
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+           
+
+
             if (noticias == null)
             {
                 return NotFound();
@@ -56,6 +65,8 @@ namespace CapitalNews.Controllers
             ViewData["CategoriaFK"] = new SelectList(_context.Categorias.OrderBy(c => c.CategoriaNome), "Id", "CategoriaNome");
             ViewData["FotografiaFK"] = new SelectList(_context.Fotografias.OrderBy(f => f.Descritores), "Id", "Descritores");
             ViewData["JornalistaFK"] = new SelectList(_context.Jornalistas.OrderBy(j => j.Nome), "Id", "Nome");
+            
+            
             return View();
         }
 
