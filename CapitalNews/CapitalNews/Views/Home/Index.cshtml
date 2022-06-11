@@ -1,8 +1,46 @@
-﻿@{
+﻿@model IEnumerable<CapitalNews.Models.Noticias>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section id="hero">
+    <div class="hero-container">
+        <h1>Capital News</h1>
+        <h2>Notícias em tempo real!</h2>
+        <a href="#about" class="btn-get-started">Descobre mais sobre nós</a>
+    </div>
+</section>
+
+<main id="main">
+        <div style="text-align:center">
+            <div style="margin-left: 33%">
+
+                <div class="col-lg-6 content order-lg-1 order-2">
+                    <h2 class="title">Sobre nós</h2>
+                    <p>
+                        A CapitalNews é um site de notícias que oferece conteúdos editoriais parecidos com os da imprensa tradicional, apresentando novas configurações possibilitadas pelo meio online. Diferencia-se dos restantes sites por criar e distribuír conteúdos específicos para os leitores.
+                    </p>
+
+                        <div class="icon"><i class="fa fa-shopping-bag"></i></div>
+                        <h4 class="title"><a href="">O que somos</a></h4>
+                        <p class="description">Somos uma organização sem fins lucrativos ao dispor de qualquer leitor. E como tal a CapitalNews tem ao dispor dos leitores todo o tipo de notícias desde política e futebol a economia e saúde.</p>
+                    </div>
+
+                    <div class="icon-box wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="icon"><i class="fa fa-photo"></i></div>
+                        <h4 class="title"><a href="">A nossa visão</a></h4>
+                        <p class="description">Temos uma visão cooperativa do futuro de combater a desinformação, onde as notícias são publicadas apenas depois de confirmadas e verificada a confiabilidade das fontes. </p>
+                    </div>
+
+                    <div class="icon-box wow fadeInUp" data-wow-delay="0.4s">
+                        <div class="icon"><i class="fa fa-bar-chart"></i></div>
+                        <h4 class="title"><a href="">O nosso objectivo</a></h4>
+                        <p class="description">O nosso objectivo é ser a plataforma lider no que diz respeito a disponibilizar informação aos leitores, para que, no mundo de hoje em que a desinformação é cada vez mais um problema maior, todos nós possamos estar mais e melhor informados.</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+</main>

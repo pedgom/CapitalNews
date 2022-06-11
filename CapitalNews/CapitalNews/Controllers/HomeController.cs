@@ -1,6 +1,8 @@
 ﻿using CapitalNews.Models;
+using CapitalNews.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Identity;
 
 namespace CapitalNews.Controllers
 {
@@ -8,9 +10,22 @@ namespace CapitalNews.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        /// <summary>
+        /// Variável que identifica, dentro da base de dados a parte do utilizador.
+        /// </summary>
+        private readonly UserManager<IdentityUser> _userManager;
+
+        /// <summary>
+        /// Variável que identifica a Base de dados do projecto
+        /// </summary>
+        private readonly CapitalDb _context;
+
+        // Construtor
+        public HomeController(ILogger<HomeController> logger, CapitalDb context, UserManager<IdentityUser> userManager)
         {
+            _context = context;
             _logger = logger;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
