@@ -16,7 +16,7 @@ namespace CapitalNews.Controllers
         private readonly UserManager<IdentityUser> _userManager;
 
         /// <summary>
-        /// Variável que identifica a Base de dados do projecto
+        /// Variável que identifica a Base de dados do projeto
         /// </summary>
         private readonly CapitalDb _context;
 
