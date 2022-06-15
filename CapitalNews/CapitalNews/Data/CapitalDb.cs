@@ -1,10 +1,29 @@
 ﻿using CapitalNews.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CapitalNews.Data
 {
-    public class CapitalDb : IdentityDbContext
+    /// <summary>
+    /// classe com os dados particulares do utilizador registado
+    /// </summary>
+    public class ApplicationUser : IdentityUser
+    {
+
+        /// <summary>
+        /// nome de batismo do utilizador
+        /// </summary>
+        public string NomeDoUtilizador { get; set; }
+
+        /// <summary>
+        /// data em que o utilizador se registou
+        /// </summary>
+        public DateTime DataRegisto { get; set; }
+
+    }
+
+    public class CapitalDb : IdentityDbContext<ApplicationUser>
     {
         public CapitalDb(DbContextOptions<CapitalDb> options)
             : base(options)
