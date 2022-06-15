@@ -69,6 +69,8 @@ namespace CapitalNews.Models
 
 
 
+        public string UserID { get; set; }
+
     }
 
 }
