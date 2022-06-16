@@ -144,6 +144,8 @@ namespace CapitalNews.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    await _userManager.AddToRoleAsync(user, "Leitor");
+
                     Input.Leitores.Email = Input.Email;
                     Input.Leitores.UserID = user.Id;
 

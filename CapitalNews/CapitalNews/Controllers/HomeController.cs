@@ -13,19 +13,19 @@ namespace CapitalNews.Controllers
         /// <summary>
         /// Variável que identifica, dentro da base de dados a parte do utilizador.
         /// </summary>
-        private readonly UserManager<IdentityUser> _userManager;
+       
 
         /// <summary>
         /// Variável que identifica a Base de dados do projeto
         /// </summary>
-        private readonly CapitalDb _context;
+       
 
         // Construtor
-        public HomeController(ILogger<HomeController> logger, CapitalDb context, UserManager<IdentityUser> userManager)
+        public HomeController(ILogger<HomeController> logger, CapitalDb context)
         {
-            _context = context;
+           
             _logger = logger;
-            _userManager = userManager;
+           
         }
 
         public IActionResult Index()

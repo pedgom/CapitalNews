@@ -36,6 +36,12 @@ namespace CapitalNews.Data
             // aquando da sua definição na SuperClasse
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<IdentityRole>().HasData(
+            new IdentityRole { Id = "a", Name = "Administrativo", NormalizedName = "ADMINISTRATIVO" },
+            new IdentityRole { Id = "j", Name = "Jornalista", NormalizedName = "JORNALISTA" },
+            new IdentityRole { Id = "l", Name = "Leitor", NormalizedName = "LEITOR" }
+            );
+
             // adicionar registos que serão adicionados às
             // tabelas da BD
             modelBuilder.Entity<Jornalistas>().HasData(
