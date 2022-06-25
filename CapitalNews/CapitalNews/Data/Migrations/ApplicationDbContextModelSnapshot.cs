@@ -17,7 +17,7 @@ namespace CapitalNews.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasAnnotation("ProductVersion", "6.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -353,21 +353,21 @@ namespace CapitalNews.Data.Migrations
                         new
                         {
                             Id = "a",
-                            ConcurrencyStamp = "3d33e59f-c30a-43b1-a5b7-a3bab5d3b9cc",
+                            ConcurrencyStamp = "30c565c6-4934-426d-a9ba-b9de9cae11ce",
                             Name = "Administrativo",
                             NormalizedName = "ADMINISTRATIVO"
                         },
                         new
                         {
                             Id = "j",
-                            ConcurrencyStamp = "542a6be9-62ae-4e20-9374-f81cba97f1cf",
+                            ConcurrencyStamp = "a994ddca-a369-4857-ba05-d581b5c46607",
                             Name = "Jornalista",
                             NormalizedName = "JORNALISTA"
                         },
                         new
                         {
                             Id = "l",
-                            ConcurrencyStamp = "64454154-bb27-4d71-96a1-c5b89a80b3b8",
+                            ConcurrencyStamp = "f5509c8e-54a6-40ab-b8b8-11ca096f1206",
                             Name = "Leitor",
                             NormalizedName = "LEITOR"
                         });

@@ -5,78 +5,95 @@
 }
 
 
-<style>
-    body {
-        background-color: rgb(200, 251, 117, 0.80);
+<div class="container">
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <h1><b>Noticias ao Minuto</b></h1>
+
+    @if (User.IsInRole("Gestor"))
+    {
+        <p>
+            <a asp-action="Create">Nova Noticia</a>
+        </p>
     }
-    
-
-    
-</style>
-
-
-<body>
-    <img src="~/Fotos/ipt.jpg" alt="Publicidade IPT" style="float:right;width:600px;height:1000px;" >
-    <h1>Noticias ao Minuto</h1>
-    <hr />
-
-    
-    
-            <p>
-               <a asp-action="Create">Criar Noticia</a>
-            </p>
-        
-
-    <div class="control-section card-control-section">
-        <div class="e-card-resize-container"> 
-        <div>
+    <table class="table">
+        <thead>
             
-            @{ foreach (var item in Model)
-                {
-                    <div class="row card-layout"> 
-                    
-                    <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"> 
-                    <hr />
-                     <div tabindex="0" >    
-                            
-                                <img src="~/Fotos/@Html.DisplayFor(modelItem => item.Fotografia.NomeFoto)"
-                                     style="border: 2px solid white"
-                                     width="200"
-                                     alt="Foto sobre @item.Fotografia.Descritores"
-                                     title="@Html.DisplayFor(modelItem => item.Fotografia.Descritores)" />
-                            
-                            <h2 style="color:black">
-                                @Html.DisplayFor(modelItem => item.Titulo)
-                            </h2>
-                            <h4>
-                                @Html.DisplayFor(modelItem => item.Categoria.CategoriaNome)
-                             </h4>
-                            <div>
-                                @Html.DisplayFor(modelItem => item.Data)
-                            </div>
-                            
-                            
-                            
-                            
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        <img src="@Url.Content("~/Fotos/")@item.Fotografia.NomeFoto" height="200" />
+                    </a>
 
-                            <div class="e-card-actions">
-                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                           
-                            </div> 
-                            </div>
-                        
-                    </div>
-                    </div>
+                </td>
+                <br />
+                <br />
+                
+                <td>
+                    <h3> @Html.DisplayFor(modelItem => item.Titulo)</h3>
+                    <h5>@Html.DisplayFor(modelItem => item.Categoria.CategoriaNome)</h5>
+
+                    <br />
+                    <br />
                     
                     
-                }
+                    <h7>@Html.DisplayFor(modelItem => item.Data)</h7>
+                    
+                    <p>@Html.DisplayFor(modelItem => item.Jornalista.Nome)</p>
+                   
+                </td>
+               
+                <td>
+                    
+                </td>
+
+               
+                <td>
+                    
+                </td>
+
+                <td>
+                               |   <a asp-action="Details" asp-route-id="@item.Id">Visualizar</a> 
+                </td>
+
+
+
+                <td>
+
+                    
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>   |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>   
+
+                </td>
+            </tr>
             }
-        </div>
-        </div>
-    </div>
-</body>
+        </tbody>
+    </table>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+</div>
 
 
  

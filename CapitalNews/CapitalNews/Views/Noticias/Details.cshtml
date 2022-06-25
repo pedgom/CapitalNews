@@ -1,79 +1,61 @@
 ﻿@model CapitalNews.Models.Noticias
 
 @{
+
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
 
+<div class="container">
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
 
+    <h1>Detalhes</h1>
 
-<div>
-    <h4>Noticias</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Titulo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Titulo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Body)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Body)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Data)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Data)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Jornalista)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Jornalista.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Fotografia)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Fotografia.Id)
-        </dd>
-        
+    <div>
+        <h4>Noticia</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Titulo)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Body)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Categoria.CategoriaNome)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Jornalista.Nome)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Fotografia)
+            </dt>
+            <dd class="col-sm-10">
+                <img src="@Url.Content("~/Fotos/")@Model.Fotografia.NomeFoto" height="200" alt="Imagem sobre @Model.Titulo" title="@Model.Titulo" />
+            </dd>
+        </dl>
+    </div>
 
-    </dl>
-</div>
-
- <h4>Lista de Comentarios associados a @Model.Titulo</h4>
+    <h4>Lista de Comentarios associados a @Model.Titulo</h4>
 
     @if (Model.ListaComentarios.Count == 0)
     {
-        <p>Não há Comentários.</p>
+        <p>Não há comentários associadas a esta notícia.</p>
     }
     else
     {
         <table class="table">
-            <tr>
-                <th>Nome de utlizador</th>
-                <th>Data</th>
-                <th>Comentário</th>
-                
-            </tr>
+            
             @foreach (var comentario in Model.ListaComentarios)
             {
                 <tr>
-                    <td>@comentario.LeitorFK</td>
-                    <td>@comentario.DataComentario</td>
+                    
                     <td>@comentario.TextoComentario</td>
+                    <td>@comentario.DataComentario</td>
                     
                     <td></td>
                 </tr>
@@ -81,9 +63,15 @@
         </table>
     }
 
-<a class="nav-link text-dark" asp-area="" asp-controller="Comentarios" asp-action="Create">Adicionar Comentario</a>
-   
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a class="nav-link text-dark" asp-area="" asp-controller="Comentarios" asp-action="Create">Adicionar Comentario</a>
+    <div>
+
+        <a asp-action="Index">Voltar à lista</a>
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
 </div>

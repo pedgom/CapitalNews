@@ -18,9 +18,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.DataComentario)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Visibilidade)
-            </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.Noticia)
             </th>
@@ -39,14 +37,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DataComentario)
             </td>
+            
             <td>
-                @Html.DisplayFor(modelItem => item.Visibilidade)
+                @Html.DisplayFor(modelItem => item.Noticia.Titulo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Noticia.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Leitor.Nome)
+                @Html.DisplayFor(modelItem => item.Leitor.Username)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
