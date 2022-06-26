@@ -17,7 +17,7 @@ namespace CapitalNews.Models
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        public string FotoJor { get; set; }
+       
     }
 
     public class NoticiasViewModel

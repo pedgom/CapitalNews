@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CapitalNews.Data;
 using CapitalNews.Models;
 
-namespace CapitalNews.Controllers
+namespace CapitalNews.Controllers.API
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -23,9 +23,25 @@ namespace CapitalNews.Controllers
 
         // GET: api/NoticiasAPI
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Noticias>>> GetNoticias()
+        public async Task<ActionResult<IEnumerable<NoticiasViewModel>>> GetNoticias()
         {
-            return await _context.Noticias.ToListAsync();
+            return await _context.Noticias
+                .Include(n => n.Categoria)
+                .Include(n => n.Jornalista)
+                .Include(n => n.Fotografia)
+                .OrderByDescending(a => a.Data)
+                .Select(n => new NoticiasViewModel
+                {
+                    Id = n.Id,
+                    Titulo = n.Titulo,
+                    Body = n.Body,
+                    Data = n.Data,
+                    Categoria = n.Categoria.CategoriaNome,
+                    Jornalista = n.Jornalista.Nome,
+                    Fotografia = n.Fotografia.NomeFoto
+                    
+                })
+                .ToListAsync();
         }
 
         // GET: api/NoticiasAPI/5

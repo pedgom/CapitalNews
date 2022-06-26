@@ -4,6 +4,7 @@ using CapitalNews.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CapitalNews.Data.Migrations
 {
     [DbContext(typeof(CapitalDb))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220626020747_Api")]
+    partial class Api
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -353,21 +355,21 @@ namespace CapitalNews.Data.Migrations
                         new
                         {
                             Id = "a",
-                            ConcurrencyStamp = "38ea82ff-f174-46ae-8d3d-1e2cb720480d",
+                            ConcurrencyStamp = "df6938bb-10ea-4d7f-b5a1-5079e5a066e1",
                             Name = "Administrativo",
                             NormalizedName = "ADMINISTRATIVO"
                         },
                         new
                         {
                             Id = "j",
-                            ConcurrencyStamp = "3c849742-2c3c-4799-9ce4-512e54334721",
+                            ConcurrencyStamp = "96ef4782-8dfa-4346-a1e8-eac328b51d25",
                             Name = "Jornalista",
                             NormalizedName = "JORNALISTA"
                         },
                         new
                         {
                             Id = "l",
-                            ConcurrencyStamp = "b34967ca-6cbe-4d20-bbc5-de520e3cd678",
+                            ConcurrencyStamp = "339e0657-481c-4f1e-8026-b1459ed1c1dc",
                             Name = "Leitor",
                             NormalizedName = "LEITOR"
                         });

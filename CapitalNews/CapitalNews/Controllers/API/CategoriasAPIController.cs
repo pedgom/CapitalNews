@@ -23,9 +23,18 @@ namespace CapitalNews.Controllers
 
         // GET: api/CategoriasAPI
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Categorias>>> GetCategorias()
+        public async Task<ActionResult<IEnumerable<CategoriasViewModel>>> GetCategorias()
         {
-            return await _context.Categorias.ToListAsync();
+            return await _context.Categorias
+                .OrderBy(c => c.CategoriaNome)
+                .Select(c => new CategoriasViewModel
+                {
+                    Id = c.Id,
+                    CategoriaNome = c.CategoriaNome
+                    
+                })
+
+                .ToListAsync();
         }
 
         // GET: api/CategoriasAPI/5
