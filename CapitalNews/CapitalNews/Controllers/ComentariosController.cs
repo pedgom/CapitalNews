@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CapitalNews.Data;
 using CapitalNews.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace CapitalNews.Controllers
 {
     public class ComentariosController : Controller
     {
         private readonly CapitalDb _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ComentariosController(CapitalDb context)
+        public ComentariosController(CapitalDb context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Comentarios
@@ -61,11 +64,16 @@ namespace CapitalNews.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TextoComentario,DataComentario,Visibilidade,NoticiaFK,LeitorFK")] Comentarios comentarios)
         {
-            if (ModelState.IsValid)
+            if (comentarios.TextoComentario != null)
             {
+                comentarios.DataComentario = DateTime.Now;
+                var user_id = _userManager.GetUserId(User);
+                var leitor = _context.Leitores.FirstOrDefault(x => x.UserID == user_id);
+                comentarios.LeitorFK = leitor.Id;
+                comentarios.Leitor = leitor;
                 _context.Add(comentarios);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Noticias", new {id = comentarios.NoticiaFK});
             }
             ViewData["LeitorFK"] = new SelectList(_context.Leitores, "Id", "Nome", comentarios.LeitorFK);
             ViewData["NoticiaFK"] = new SelectList(_context.Noticias, "Id", "Id", comentarios.NoticiaFK);

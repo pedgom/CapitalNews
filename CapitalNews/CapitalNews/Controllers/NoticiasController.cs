@@ -41,11 +41,10 @@ namespace CapitalNews.Controllers
                 .Include(n => n.Categoria)
                 .Include(n => n.Fotografia)
                 .Include(n => n.Jornalista)
-                .Include(r => r.ListaComentarios).Where(c => c.Id == id)
-
+                .Include(r => r.ListaComentarios)
+                .ThenInclude(r => r.Leitor)
+                .Where(c => c.Id == id)
                 .FirstOrDefaultAsync(m => m.Id == id);
-
-           
 
 
             if (noticias == null)
