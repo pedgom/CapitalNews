@@ -71,6 +71,21 @@ namespace CapitalNews.Data
 
             );
 
+            modelBuilder.Entity<Fotografias>().HasData(
+                new Fotografias()
+                {
+                    Id = 1,
+                    NomeFoto = "foto1",
+                    Descritores = "foto1 descritores1" 
+                },
+                new Fotografias()
+                {
+                    Id = 2,
+                    NomeFoto = "foto2",
+                    Descritores = "foto1 descritores2"
+                }
+                );
+
             modelBuilder.Entity<Categorias>().HasData(
                  new Categorias()
                  {

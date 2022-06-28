@@ -38,5 +38,7 @@ namespace CapitalNews.Models
         /// Lista de Noticias postadas pelo Jornalistas
         /// </summary>
         public virtual ICollection<Noticias> ListaNoticias { get; set; }
+
+        public string UserID { get; set; }
     }
 }

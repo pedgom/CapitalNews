@@ -4,6 +4,7 @@ using CapitalNews.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CapitalNews.Data.Migrations
 {
     [DbContext(typeof(CapitalDb))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220628134730_users_keys_connection")]
+    partial class users_keys_connection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -200,20 +202,6 @@ namespace CapitalNews.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Fotografias");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Descritores = "foto1 descritores1",
-                            NomeFoto = "foto1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Descritores = "foto1 descritores2",
-                            NomeFoto = "foto2"
-                        });
                 });
 
             modelBuilder.Entity("CapitalNews.Models.Jornalistas", b =>
@@ -370,21 +358,21 @@ namespace CapitalNews.Data.Migrations
                         new
                         {
                             Id = "a",
-                            ConcurrencyStamp = "430daa4e-4a8a-48d1-8eb9-228602d924b2",
+                            ConcurrencyStamp = "3e3df178-7ad0-43ec-836d-908728ea8993",
                             Name = "Administrativo",
                             NormalizedName = "ADMINISTRATIVO"
                         },
                         new
                         {
                             Id = "j",
-                            ConcurrencyStamp = "5e11ae98-bbef-4ca3-9ffa-050b225b8ef4",
+                            ConcurrencyStamp = "b560b8df-5b99-4f86-8c18-8ed855e1694c",
                             Name = "Jornalista",
                             NormalizedName = "JORNALISTA"
                         },
                         new
                         {
                             Id = "l",
-                            ConcurrencyStamp = "37a25c98-4bc4-43a6-ab2a-486499a3f6c0",
+                            ConcurrencyStamp = "6f4eedb3-7c1b-4ed1-9b20-d2f057f7289f",
                             Name = "Leitor",
                             NormalizedName = "LEITOR"
                         });

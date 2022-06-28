@@ -12,8 +12,9 @@
     <br />
     <br />
 
-<h1>@ViewData["Title"]</h1>
 
+<div class="container">
+<h1>@ViewData["Title"]</h1>
 <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
     <h2>Criar uma nova conta.</h2>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -68,6 +69,7 @@
         </div>
     </div>
 </form>
+</div>
 
 @section Scripts {
 <partial name="_ValidationScriptsPartial" />

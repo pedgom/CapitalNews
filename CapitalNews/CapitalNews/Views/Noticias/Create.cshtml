@@ -10,47 +10,49 @@
     <br />
     <br />
     <br />
-<h1>Create</h1>
+<div class="container">
+    <h1>Create</h1>
 
-<h4>Noticias</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Titulo" class="control-label"></label>
-                <input asp-for="Titulo" class="form-control" />
-                <span asp-validation-for="Titulo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Body" class="control-label"></label>
-                <textarea asp-for="Body" class="control-label" rows="4" cols="50"></textarea>
-                <span asp-validation-for="Body" class="text-danger"></span>
-            </div>
+    <h4>Noticias</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Titulo" class="control-label"></label>
+                    <input asp-for="Titulo" class="form-control" />
+                    <span asp-validation-for="Titulo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Body" class="control-label"></label>
+                    <textarea asp-for="Body" class="control-label" rows="4" cols="50"></textarea>
+                    <span asp-validation-for="Body" class="text-danger"></span>
+                </div>
             
-            <div class="form-group">
-                <label asp-for="CategoriaFK" class="control-label"></label>
-                <select asp-for="CategoriaFK" class ="form-control" asp-items="ViewBag.CategoriaFK"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="JornalistaFK" class="control-label"></label>
-                <select asp-for="JornalistaFK" class ="form-control" asp-items="ViewBag.JornalistaFK"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="FotografiaFK" class="control-label"></label>
-                 
-                <select asp-for="FotografiaFK" class ="form-control" asp-items="ViewBag.FotografiaFK"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="form-group">
+                    <label asp-for="CategoriaFK" class="control-label"></label>
+                    <select asp-for="CategoriaFK" class ="form-control" asp-items="ViewBag.CategoriaFK"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="JornalistaFK" class="control-label"></label>
+                    <select asp-for="JornalistaFK" class ="form-control" asp-items="ViewBag.JornalistaFK"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FotografiaFK" class="control-label"></label>
+                    @*<input asp-for="FotografiaFK" tyep="file**" class="form-control" />*@
+                    <select asp-for="FotografiaFK" class ="form-control" asp-items="ViewBag.FotografiaFK"></select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
 </div>
 
 @section Scripts {
