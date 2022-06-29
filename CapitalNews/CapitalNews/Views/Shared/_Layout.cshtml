@@ -72,8 +72,15 @@
                                     </a>
 
                                 </li>
+                                @if (User.IsInRole("Administrativo"))
+                                {
+                                    <li>
+                                   <a asp-area="" asp-controller="Leitores" asp-action="Index">
+                                       Utilizadores
+                                    </a>
+                                    </li>
+                                }
 
-                               
                                 
                                 <li>
                                     <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

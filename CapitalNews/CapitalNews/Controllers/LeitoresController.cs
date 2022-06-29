@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CapitalNews.Data;
 using CapitalNews.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace CapitalNews.Controllers
 {
@@ -15,19 +16,26 @@ namespace CapitalNews.Controllers
     public class LeitoresController : Controller
     {
         private readonly CapitalDb _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public LeitoresController(CapitalDb context)
+        public LeitoresController(CapitalDb context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Leitores
+
+        [Authorize]
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Index()
         {
               return View(await _context.Leitores.ToListAsync());
         }
 
         // GET: Leitores/Details/5
+        [Authorize]
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Leitores == null)
@@ -46,6 +54,8 @@ namespace CapitalNews.Controllers
         }
 
         // GET: Leitores/Create
+        [Authorize]
+        [Authorize(Roles = "Administrativo")]
         public IActionResult Create()
         {
             return View();
@@ -56,6 +66,8 @@ namespace CapitalNews.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Create([Bind("Id,Nome,Email,Datanasc,Sexo,Fotolei,Username")] Leitores leitores)
         {
             if (ModelState.IsValid)
@@ -68,6 +80,8 @@ namespace CapitalNews.Controllers
         }
 
         // GET: Leitores/Edit/5
+        [Authorize]
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Leitores == null)
@@ -88,6 +102,8 @@ namespace CapitalNews.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Email,Datanasc,Sexo,Fotolei,Username")] Leitores leitores)
         {
             if (id != leitores.Id)
@@ -97,6 +113,13 @@ namespace CapitalNews.Controllers
 
             if (ModelState.IsValid)
             {
+
+                /*var userr = await _context.Leitores.FirstOrDefaultAsync(x => x.Id == leitores.Id);
+                var user = await _userManager.FindByIdAsync(userr.UserID);
+                var role = await _context.UserRoles.FirstOrDefaultAsync(r => r.UserId == userr.UserID);
+                await _userManager.RemoveFromRoleAsync(user, role.RoleId);
+                await _userManager.AddToRoleAsync(user, leitores.Fotolei);*/
+
                 try
                 {
                     _context.Update(leitores);
@@ -119,6 +142,8 @@ namespace CapitalNews.Controllers
         }
 
         // GET: Leitores/Delete/5
+        [Authorize]
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Leitores == null)
@@ -139,6 +164,8 @@ namespace CapitalNews.Controllers
         // POST: Leitores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
+        [Authorize(Roles = "Administrativo")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Leitores == null)
