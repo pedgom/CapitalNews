@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CapitalNews.Data;
 using CapitalNews.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CapitalNews.Controllers
 {
@@ -50,6 +51,7 @@ namespace CapitalNews.Controllers
         }
 
         // GET: Comentarios/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["LeitorFK"] = new SelectList(_context.Leitores, "Id", "Nome");
@@ -62,6 +64,7 @@ namespace CapitalNews.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Id,TextoComentario,DataComentario,Visibilidade,NoticiaFK,LeitorFK")] Comentarios comentarios)
         {
             if (comentarios.TextoComentario != null)
@@ -81,6 +84,8 @@ namespace CapitalNews.Controllers
         }
 
         // GET: Comentarios/Edit/5
+        [Authorize]
+        [Authorize(Roles = "Jornalista")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Comentarios == null)
@@ -103,6 +108,8 @@ namespace CapitalNews.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
+        [Authorize(Roles = "Jornalista")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,TextoComentario,DataComentario,Visibilidade,NoticiaFK,LeitorFK")] Comentarios comentarios)
         {
             if (id != comentarios.Id)
@@ -136,6 +143,8 @@ namespace CapitalNews.Controllers
         }
 
         // GET: Comentarios/Delete/5
+        [Authorize]
+        [Authorize(Roles = "Jornalista")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Comentarios == null)
@@ -158,6 +167,8 @@ namespace CapitalNews.Controllers
         // POST: Comentarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
+        [Authorize(Roles = "Jornalista")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Comentarios == null)

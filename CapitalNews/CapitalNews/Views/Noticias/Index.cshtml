@@ -1,4 +1,7 @@
-﻿@model IEnumerable<CapitalNews.Models.Noticias>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@model IEnumerable<CapitalNews.Models.Noticias>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,10 +17,11 @@
     
 
     <h1><b>Noticias ao Minuto</b></h1>
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Jornalista")){
         <p>
             <a asp-action="Create">Nova Noticia</a>
         </p>
-    
+    }
     <table class="table">
         <thead>
             
@@ -59,16 +63,17 @@
                 </td>
 
                 <td>
-                               |   <a asp-action="Details" asp-route-id="@item.Id">Visualizar</a> 
+                    <a asp-action="Details" asp-route-id="@item.Id">Visualizar</a> 
                 </td>
 
 
 
                 <td>
 
-                    
-                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>   |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>   
+                @if (SignInManager.IsSignedIn(User) && User.IsInRole("Jornalista")) {
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" > Eliminar </a>
+                }
 
                 </td>
             </tr>

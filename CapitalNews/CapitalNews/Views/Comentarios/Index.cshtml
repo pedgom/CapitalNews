@@ -1,4 +1,7 @@
-﻿@model IEnumerable<CapitalNews.Models.Comentarios>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@model IEnumerable<CapitalNews.Models.Comentarios>
 
 @{
     ViewData["Title"] = "Index";
@@ -52,11 +55,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Leitor.Username)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+            @if (SignInManager.IsSignedIn(User) && User.IsInRole("Jornalista")){
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            }
         </tr>
 }
     </tbody>

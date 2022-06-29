@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CapitalNews.Data;
 using CapitalNews.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CapitalNews.Controllers
 {
@@ -55,6 +56,9 @@ namespace CapitalNews.Controllers
             return View(noticias);
         }
 
+
+        [Authorize]
+        [Authorize(Roles="Jornalista")]
         // GET: Noticias/Create
         public IActionResult Create()
         {
@@ -74,6 +78,8 @@ namespace CapitalNews.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
+        [Authorize(Roles = "Jornalista")]
         public async Task<IActionResult> Create([Bind("Id,Titulo,Body,Data,CategoriaFK,JornalistaFK,FotografiaFK")] Noticias noticias)
         {
             if (ModelState.IsValid)
@@ -90,6 +96,8 @@ namespace CapitalNews.Controllers
         }
 
         // GET: Noticias/Edit/5
+        [Authorize]
+        [Authorize(Roles = "Jornalista")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Noticias == null)
@@ -113,6 +121,8 @@ namespace CapitalNews.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
+        [Authorize(Roles = "Jornalista")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,Body,Data,CategoriaFK,JornalistaFK,FotografiaFK")] Noticias noticias)
         {
             if (id != noticias.Id)
@@ -147,6 +157,8 @@ namespace CapitalNews.Controllers
         }
 
         // GET: Noticias/Delete/5
+        [Authorize]
+        [Authorize(Roles = "Jornalista")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Noticias == null)
@@ -170,6 +182,8 @@ namespace CapitalNews.Controllers
         // POST: Noticias/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
+        [Authorize(Roles = "Jornalista")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Noticias == null)
