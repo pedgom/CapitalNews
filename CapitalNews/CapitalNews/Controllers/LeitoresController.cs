@@ -113,15 +113,8 @@ namespace CapitalNews.Controllers
 
             if (ModelState.IsValid)
             {
-
-                /*var userr = await _context.Leitores.FirstOrDefaultAsync(x => x.Id == leitores.Id);
-                var user = await _userManager.FindByIdAsync(userr.UserID);
-                var role = await _context.UserRoles.FirstOrDefaultAsync(r => r.UserId == userr.UserID);
-                await _userManager.RemoveFromRoleAsync(user, role.RoleId);
-                await _userManager.AddToRoleAsync(user, leitores.Fotolei);*/
-
                 try
-                {
+                {   
                     _context.Update(leitores);
                     await _context.SaveChangesAsync();
                 }
@@ -140,6 +133,31 @@ namespace CapitalNews.Controllers
             }
             return View(leitores);
         }
+
+        public async Task<IActionResult> Mudar_Role(int id, string role)
+        {
+            var userr = await _context.Leitores.FirstOrDefaultAsync(x => x.Id == id);
+            var user = await _userManager.FindByIdAsync(userr.UserID);
+            var rolex = await _context.UserRoles.FirstOrDefaultAsync(r => r.UserId == userr.UserID);
+            if (rolex.RoleId == "a")
+            {
+                await _userManager.RemoveFromRoleAsync(user, "Administrativo");
+                await _userManager.AddToRoleAsync(user, role);
+            }
+            else if (rolex.RoleId == "j")
+            {
+                await _userManager.RemoveFromRoleAsync(user, "Jornalista");
+                await _userManager.AddToRoleAsync(user, role);
+            }
+            else if (rolex.RoleId == "l")
+            {
+                await _userManager.RemoveFromRoleAsync(user, "Leitor");
+                await _userManager.AddToRoleAsync(user, role);
+            }
+            return Redirect("Index");
+        }
+
+
 
         // GET: Leitores/Delete/5
         [Authorize]
