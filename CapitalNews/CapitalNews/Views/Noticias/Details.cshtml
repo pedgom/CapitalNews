@@ -12,32 +12,49 @@
     <br />
     <br />
 
-    <h1>Detalhes</h1>
+    <h1></h1>
 
     <div>
-        <h4>Noticia</h4>
+        <h4></h4>
         <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Titulo)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Body)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Categoria.CategoriaNome)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Jornalista.Nome)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Fotografia)
-            </dt>
-            <dd class="col-sm-10">
-                <img src="@Url.Content("~/Fotos/")@Model.Fotografia.NomeFoto" height="200" alt="Imagem sobre @Model.Titulo" title="@Model.Titulo" />
-            </dd>
-        </dl>
+        <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@Model.Id">
+                        <img src="@Url.Content("~/Fotos/")@Model.Fotografia.NomeFoto" height="400" width="1000" />
+                    </a>
+
+                </td>
+                <br />
+                <br />
+                
+                <td>
+                    <h1> @Html.DisplayFor(model => model.Titulo)</h1>
+                    <h5>@Html.DisplayFor(model => model.Categoria.CategoriaNome)</h5>
+
+                    <br />
+                    <br />
+
+                    <p> @Html.DisplayFor(model => model.Body)</p>
+                    
+                    
+                    <h7>@Html.DisplayFor(model => model.Data)</h7>
+                    
+                    <p>@Html.DisplayFor(model => model.Jornalista.Nome)</p>
+                   
+                </td>
+               
+               
+            </tr>
     </div>
+
+     <br />
+    <br />
+    <br />
+    <br />
+    <br />
+     <br />
+    <br />
+    
 
     <h4>Lista de Comentarios associados a @Model.Titulo</h4>
 
