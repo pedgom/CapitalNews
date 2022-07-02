@@ -12,7 +12,12 @@ namespace CapitalNews.Controllers
 {
     public class FotografiasController : Controller
     {
+
+        /// <summary>
+        /// variavel para identificar a base de dados
+        /// </summary>
         private readonly CapitalDb _context;
+
         private readonly IWebHostEnvironment _caminho;
 
         public FotografiasController(CapitalDb context, IWebHostEnvironment caminho)
@@ -22,12 +27,19 @@ namespace CapitalNews.Controllers
         }
 
         // GET: Fotografias
+        /// <summary>
+        /// lista os dados das Fotografias
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
               return View(await _context.Fotografias.ToListAsync());
         }
 
         // GET: Fotografias/Details/5
+        /// <summary>
+        /// mostra os detalhes das Fotografias
+        /// <returns></returns>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -46,6 +58,10 @@ namespace CapitalNews.Controllers
         }
 
         // GET: Fotografias/Create
+        /// <summary>
+        /// Criar fotografias
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
             return View();
@@ -120,6 +136,9 @@ namespace CapitalNews.Controllers
         }
 
         // GET: Fotografias/Edit/5
+        /// <summary>
+        /// edição dos dados de uma fotografia 
+        /// </summary>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)

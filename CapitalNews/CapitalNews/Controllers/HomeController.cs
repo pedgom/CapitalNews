@@ -10,14 +10,7 @@ namespace CapitalNews.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        /// <summary>
-        /// Variável que identifica, dentro da base de dados a parte do utilizador.
-        /// </summary>
-       
-
-        /// <summary>
-        /// Variável que identifica a Base de dados do projeto
-        /// </summary>
+        
        
 
         // Construtor

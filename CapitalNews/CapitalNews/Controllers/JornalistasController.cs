@@ -14,6 +14,9 @@ namespace CapitalNews.Controllers
     [Authorize]
     public class JornalistasController : Controller
     {
+        /// <summary>
+        /// variavel para identificar a base de dados
+        /// </summary>
         private readonly CapitalDb _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
@@ -24,12 +27,19 @@ namespace CapitalNews.Controllers
         }
 
         // GET: Jornalistas
+        /// <summary>
+        /// lista os dados dos Jornalistas
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
               return View(await _context.Jornalistas.ToListAsync());
         }
 
         // GET: Jornalistas/Details/5
+        /// <summary>
+        /// mostra os detalhes das bebidas
+        /// <returns></returns>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

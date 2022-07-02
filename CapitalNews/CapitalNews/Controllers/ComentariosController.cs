@@ -14,7 +14,14 @@ namespace CapitalNews.Controllers
 {
     public class ComentariosController : Controller
     {
+        // <summary>
+        /// variavel para identificar a base de dados
+        /// </summary>
         private readonly CapitalDb _context;
+
+        /// <summary>
+        /// variavel que recolhe os dados de um utilizador autenticado
+        /// </summary>
         private readonly UserManager<ApplicationUser> _userManager;
 
         public ComentariosController(CapitalDb context, UserManager<ApplicationUser> userManager)
@@ -24,6 +31,10 @@ namespace CapitalNews.Controllers
         }
 
         // GET: Comentarios
+        /// <summary>
+        /// lista os dados dos comentarios
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
             var capitalDb = _context.Comentarios.Include(c => c.Leitor).Include(c => c.Noticia);
@@ -31,6 +42,9 @@ namespace CapitalNews.Controllers
         }
 
         // GET: Comentarios/Details/5
+        /// <summary>
+        /// mostra os detalhes dos comentarios
+        /// <returns></returns>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Comentarios == null)
@@ -50,6 +64,11 @@ namespace CapitalNews.Controllers
             return View(comentarios);
         }
 
+        // GET: Bebidas/Create
+        /// <summary>
+        /// Apenas o utilizador autenticado pode criar comentarios
+        /// </summary>
+        /// <returns></returns>
         // GET: Comentarios/Create
         [Authorize]
         public IActionResult Create()
@@ -84,6 +103,9 @@ namespace CapitalNews.Controllers
         }
 
         // GET: Comentarios/Edit/5
+        /// <summary>
+        /// edição dos dados de uma Noticia por parte do Jornalista
+        /// </summary>
         [Authorize]
         [Authorize(Roles = "Jornalista")]
         public async Task<IActionResult> Edit(int? id)

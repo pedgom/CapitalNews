@@ -7,11 +7,16 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CapitalNews.Data;
 using CapitalNews.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CapitalNews.Controllers
 {
+    
     public class CategoriasController : Controller
     {
+        /// <summary>
+        /// variavel para identificar a base de dados
+        /// </summary>
         private readonly CapitalDb _context;
 
         public CategoriasController(CapitalDb context)
@@ -20,12 +25,19 @@ namespace CapitalNews.Controllers
         }
 
         // GET: Categorias
+        /// <summary>
+        /// lista os dados das Categorias
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
               return View(await _context.Categorias.ToListAsync());
         }
 
         // GET: Categorias/Details/5
+        /// <summary>
+        /// mostra os detalhes das Categorias
+        /// <returns></returns>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Categorias == null)
@@ -44,6 +56,7 @@ namespace CapitalNews.Controllers
         }
 
         // GET: Categorias/Create
+
         public IActionResult Create()
         {
             return View();

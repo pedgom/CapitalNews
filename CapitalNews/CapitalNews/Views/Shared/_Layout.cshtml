@@ -79,6 +79,29 @@
                                        Utilizadores
                                     </a>
                                     </li>
+
+                                    <li>
+                                    <a asp-area="" asp-controller="Jornalistas" asp-action="Index">
+                                       Jornalistas
+                                    </a>
+                                    </li>
+                                }
+
+                               
+
+                                @if (User.IsInRole("Jornalista"))
+                                {
+                                    <li>
+                                    <a asp-area="" asp-controller="Categorias" asp-action="Index">
+                                       Categorias
+                                    </a>
+                                    </li>
+
+                                    <li>
+                                    <a asp-area="" asp-controller="Fotografias" asp-action="Index">
+                                       Fotografias
+                                    </a>
+                                    </li>
                                 }
 
                                 

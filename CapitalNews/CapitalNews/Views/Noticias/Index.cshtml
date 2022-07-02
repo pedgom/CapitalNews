@@ -19,7 +19,7 @@
     <h1><b>Noticias ao Minuto</b></h1>
     @if (SignInManager.IsSignedIn(User) && User.IsInRole("Jornalista")){
         <p>
-            <a asp-action="Create">Nova Noticia</a>
+            <a asp-action="Create">Adicionar Noticia</a>
         </p>
     }
     <table class="table">
