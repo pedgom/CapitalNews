@@ -69,6 +69,7 @@ namespace CapitalNews.Controllers
         {
             if (comentarios.TextoComentario != null)
             {
+                // 
                 comentarios.DataComentario = DateTime.Now;
                 var user_id = _userManager.GetUserId(User);
                 var leitor = _context.Leitores.FirstOrDefault(x => x.UserID == user_id);
