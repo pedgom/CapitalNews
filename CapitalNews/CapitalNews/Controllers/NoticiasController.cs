@@ -8,16 +8,19 @@ using Microsoft.EntityFrameworkCore;
 using CapitalNews.Data;
 using CapitalNews.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace CapitalNews.Controllers
 {
     public class NoticiasController : Controller
     {
         private readonly CapitalDb _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public NoticiasController(CapitalDb context)
+        public NoticiasController(CapitalDb context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Noticias
@@ -56,6 +59,26 @@ namespace CapitalNews.Controllers
             return View(noticias);
         }
 
+        public async Task<IActionResult> Comentar(int id, string comentario)
+        {
+            Comentarios comentarios = new Comentarios
+            {
+                TextoComentario = comentario,
+                DataComentario = DateTime.Now,
+                Visibilidade = true,
+                NoticiaFK = id,
+            };
+            var user_id = _userManager.GetUserId(User);
+            var leitor = _context.Leitores.FirstOrDefault(x => x.UserID == user_id);
+            comentarios.LeitorFK = leitor.Id;
+            comentarios.Leitor = leitor;
+            var noticia = _context.Noticias.FirstOrDefault(x => x.Id == id);
+            comentarios.Noticia = noticia;
+            _context.Add(comentarios);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Details", "Noticias", new { id = comentarios.NoticiaFK});
+        }
+
 
         [Authorize]
         [Authorize(Roles="Jornalista")]
@@ -82,6 +105,9 @@ namespace CapitalNews.Controllers
         [Authorize(Roles = "Jornalista")]
         public async Task<IActionResult> Create([Bind("Id,Titulo,Body,Data,CategoriaFK,JornalistaFK,FotografiaFK")] Noticias noticias)
         {
+            var user_id = _userManager.GetUserId(User);
+            var leitor = _context.Leitores.FirstOrDefault(x => x.UserID == user_id);
+            noticias.JornalistaFK = leitor.Id;
             if (ModelState.IsValid)
             {
                 noticias.Data= DateTime.Now;

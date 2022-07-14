@@ -23,9 +23,6 @@
         </p>
     }
     <table class="table">
-        <thead>
-            
-        </thead>
         <tbody>
             @foreach (var item in Model)
             {
@@ -36,11 +33,11 @@
                     </a>
 
                 </td>
-                <br />
-                <br />
                 
                 <td>
-                    <h3> @Html.DisplayFor(modelItem => item.Titulo)</h3>
+                     <a asp-action="Details" asp-route-id="@item.Id">
+                        <h3> @Html.DisplayFor(modelItem => item.Titulo)</h3>
+                     </a>
                     <h5>@Html.DisplayFor(modelItem => item.Categoria.CategoriaNome)</h5>
 
                     <br />
@@ -62,9 +59,6 @@
                     
                 </td>
 
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.Id">Visualizar</a> 
-                </td>
 
 
 
