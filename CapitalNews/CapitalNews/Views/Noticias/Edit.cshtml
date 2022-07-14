@@ -10,13 +10,14 @@
     <br />
     <br />
     <br />
+<div class="container">
 <h1>Edit</h1>
 
 <h4>Noticias</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -25,8 +26,9 @@
                 <span asp-validation-for="Titulo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Body" class="control-label"></label>
-                <input asp-for="Body" class="form-control" />
+                <label value="Corpo de texto" class="control-label"></label>
+                <!--<input asp-for="Body" class="form-control" />-->
+                <textarea asp-for="Body" class="form-control" rows="5" cols="50"></textarea>
                 <span asp-validation-for="Body" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -46,7 +48,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Fotografia" class="control-label"></label>
-                <select asp-for="FotografiaFK" class="form-control" asp-items="ViewBag.FotografiaFK"></select>
+                <input type="file" name="fotos" class="form-control" accept=".jpg,.png" />
+                <!--<select asp-for="FotografiaFK" class="form-control" asp-items="ViewBag.FotografiaFK"></select>-->
                 <span asp-validation-for="FotografiaFK" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -59,7 +62,7 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

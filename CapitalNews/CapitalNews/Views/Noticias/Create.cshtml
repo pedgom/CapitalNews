@@ -17,7 +17,7 @@
     <hr />
     <div class="row">
         <div class="col-md-4">
-            <form asp-action="Create">
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Titulo" class="control-label"></label>
@@ -25,7 +25,7 @@
                     <span asp-validation-for="Titulo" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Body" class="control-label"></label>
+                    <label value="Corpo do texto" class="control-label"></label>
                     <textarea asp-for="Body" class="control-label" rows="4" cols="50"></textarea>
                     <span asp-validation-for="Body" class="text-danger"></span>
                 </div>
@@ -39,9 +39,9 @@
                     <select asp-for="JornalistaFK" class ="form-control" asp-items="ViewBag.JornalistaFK"></select>
                 </div>-->
                 <div class="form-group">
-                    <label asp-for="Fotografia" value="Fotografia" class="control-label"></label>
-                    @*<input asp-for="FotografiaFK" tyep="file**" class="form-control" />*@
-                    <select asp-for="FotografiaFK" class ="form-control" asp-items="ViewBag.FotografiaFK"></select>
+                    <label value="Fotografia" class="control-label"></label>
+                    <input type="file" name="fotos" class="form-control" accept=".jpg,.png" />
+                    @*<select asp-for="FotografiaFK" class ="form-control" asp-items="ViewBag.FotografiaFK"></select>*@
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />

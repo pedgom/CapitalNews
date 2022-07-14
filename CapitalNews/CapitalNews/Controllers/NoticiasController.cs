@@ -16,11 +16,13 @@ namespace CapitalNews.Controllers
     {
         private readonly CapitalDb _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IWebHostEnvironment _caminho;
 
-        public NoticiasController(CapitalDb context, UserManager<ApplicationUser> userManager)
+        public NoticiasController(CapitalDb context, UserManager<ApplicationUser> userManager, IWebHostEnvironment caminho)
         {
             _context = context;
             _userManager = userManager;
+            _caminho = caminho;
         }
 
         // GET: Noticias
@@ -103,11 +105,67 @@ namespace CapitalNews.Controllers
         [ValidateAntiForgeryToken]
         [Authorize]
         [Authorize(Roles = "Jornalista")]
-        public async Task<IActionResult> Create([Bind("Id,Titulo,Body,Data,CategoriaFK,JornalistaFK,FotografiaFK")] Noticias noticias)
+        public async Task<IActionResult> Create([Bind("Id,Titulo,Body,Data,CategoriaFK,JornalistaFK,FotografiaFK")] Noticias noticias, IFormFile fotos)
         {
+
+            Fotografias fotografia = new Fotografias();
+
+            if (fotos == null)
+            {
+                fotografia.NomeFoto = "noJornalista.jpg";
+            }
+            else
+            {
+                if (!(fotos.ContentType == "image/png" || fotos.ContentType == "image/jpeg"))
+                {
+
+                    ModelState.AddModelError("", "Por favor, adicione um ficheiro .png ou .jpg");
+
+                    return View(noticias);
+                }
+                else
+                {
+
+                    Guid g = Guid.NewGuid();
+                    string nomeFoto = g.ToString();
+                    string extensaoFoto = Path.GetExtension(fotos.FileName).ToLower();
+                    nomeFoto += extensaoFoto;
+                    fotografia.NomeFoto = nomeFoto;
+                }
+            }
+
+            try
+            {
+                _context.Add(fotografia);
+                await _context.SaveChangesAsync();
+                if (fotos != null)
+                {
+
+                    string nomeLocalizacaoFicheiro = _caminho.WebRootPath;
+                    nomeLocalizacaoFicheiro = Path.Combine(nomeLocalizacaoFicheiro, "Fotos");
+
+                    if (!Directory.Exists(nomeLocalizacaoFicheiro))
+                    {
+                        Directory.CreateDirectory(nomeLocalizacaoFicheiro);
+                    }
+
+                    string nomeDaFoto = Path.Combine(nomeLocalizacaoFicheiro, fotografia.NomeFoto);
+                    using var stream = new FileStream(nomeDaFoto, FileMode.Create);
+                    await fotos.CopyToAsync(stream);
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Ocorreu um erro com a operação de guardar os dados da Foto " + fotografia.Descritores);
+                return View(noticias);
+            }
+
+
             var user_id = _userManager.GetUserId(User);
             var leitor = _context.Leitores.FirstOrDefault(x => x.UserID == user_id);
             noticias.JornalistaFK = leitor.Id;
+            noticias.FotografiaFK = fotografia.Id;
+            noticias.Fotografia = fotografia;
             if (ModelState.IsValid)
             {
                 noticias.Data= DateTime.Now;
@@ -149,13 +207,68 @@ namespace CapitalNews.Controllers
         [ValidateAntiForgeryToken]
         [Authorize]
         [Authorize(Roles = "Jornalista")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,Body,Data,CategoriaFK,JornalistaFK,FotografiaFK")] Noticias noticias)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,Body,Data,CategoriaFK,JornalistaFK,FotografiaFK")] Noticias noticias, IFormFile fotos)
         {
+
             if (id != noticias.Id)
             {
                 return NotFound();
             }
 
+            Fotografias fotografia = new Fotografias();
+
+            if (fotos == null)
+            {
+                fotografia.NomeFoto = "noJornalista.jpg";
+            }
+            else
+            {
+                if (!(fotos.ContentType == "image/png" || fotos.ContentType == "image/jpeg"))
+                {
+
+                    ModelState.AddModelError("", "Por favor, adicione um ficheiro .png ou .jpg");
+
+                    return View(noticias);
+                }
+                else
+                {
+
+                    Guid g = Guid.NewGuid();
+                    string nomeFoto = g.ToString();
+                    string extensaoFoto = Path.GetExtension(fotos.FileName).ToLower();
+                    nomeFoto += extensaoFoto;
+                    fotografia.NomeFoto = nomeFoto;
+                }
+            }
+
+            try
+            {
+                _context.Add(fotografia);
+                await _context.SaveChangesAsync();
+                if (fotos != null)
+                {
+
+                    string nomeLocalizacaoFicheiro = _caminho.WebRootPath;
+                    nomeLocalizacaoFicheiro = Path.Combine(nomeLocalizacaoFicheiro, "Fotos");
+
+                    if (!Directory.Exists(nomeLocalizacaoFicheiro))
+                    {
+                        Directory.CreateDirectory(nomeLocalizacaoFicheiro);
+                    }
+
+                    string nomeDaFoto = Path.Combine(nomeLocalizacaoFicheiro, fotografia.NomeFoto);
+                    using var stream = new FileStream(nomeDaFoto, FileMode.Create);
+                    await fotos.CopyToAsync(stream);
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Ocorreu um erro com a operação de guardar os dados da Foto " + fotografia.Descritores);
+                return View(noticias);
+            }
+
+            noticias.FotografiaFK = fotografia.Id;
+            noticias.Fotografia = fotografia;
             if (ModelState.IsValid)
             {
                 try
