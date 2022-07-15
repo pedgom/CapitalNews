@@ -5,8 +5,6 @@
     ViewData["Title"] = "Details";
 }
 
-
-
 <div class="container">
     <br />
     <br />
@@ -19,43 +17,33 @@
     <div>
         <h4>Noticia</h4>
         <hr />
-        <div>
-        <h4></h4>
-        <hr />
-        <tr>
-                <td>
-                    <a asp-action="Details" asp-route-id="@Model.Id">
-                        <img src="@Url.Content("~/Fotos/")@Model.Fotografia.NomeFoto" height="400" width="1000" />
-                    </a>
-
-                </td>
-                <br />
-                <br />
-
-                <td>
-                    <h1> @Html.DisplayFor(model => model.Titulo)</h1>
-                    <h5>@Html.DisplayFor(model => model.Categoria.CategoriaNome)</h5>
-
-                    <br />
-                    <br />
-
-                    <p> @Html.DisplayFor(model => model.Body)</p>
-
-
-                    <h7>@Html.DisplayFor(model => model.Data)</h7>
-
-                    <p>@Html.DisplayFor(model => model.Jornalista.Nome)</p>
-
-                </td>
-
-
-        </tr>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Titulo)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Body)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Categoria)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Categoria.CategoriaNome)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Jornalista)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Jornalista.Nome)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Fotografia)
+            </dt>
+            <dd class="col-sm-10">
+                <img src="@Url.Content("~/Fotos/")@Model.Fotografia.NomeFoto" height="200" alt="Imagem sobre @Model.Titulo" title="@Model.Titulo" />
+            </dd>
+        </dl>
     </div>
-    </div>
-
-    <div>
-
-        <h5>Comentários</h5>
 
     <form method="post" asp-action="Comentar">
         <input type="hidden" name="id" value="@Model.Id" />
@@ -90,10 +78,6 @@
             }
         </table>
     }
-
-    </div>
-
-    
 
     <div>
 
