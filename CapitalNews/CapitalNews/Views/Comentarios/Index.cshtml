@@ -15,10 +15,11 @@
     <br />
     <br />
 
-<h1>Index</h1>
+<div class="container">
+<h1>Comentários</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Criar Comentario</a>
 </p>
 <table class="table">
     <thead>
@@ -55,14 +56,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Leitor.Username)
             </td>
-            @if (SignInManager.IsSignedIn(User) && User.IsInRole("Jornalista")){
+            @if (SignInManager.IsSignedIn(User) && User.IsInRole("Administrativo")){
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    
+                    <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
                 </td>
             }
         </tr>
 }
     </tbody>
 </table>
+
+</div>

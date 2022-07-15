@@ -28,7 +28,7 @@ namespace CapitalNews.Controllers
         // GET: Noticias
         public async Task<IActionResult> Index()
         {
-            var capitalDb = _context.Noticias.Include(n => n.Categoria).Include(n => n.Fotografia).Include(n => n.Jornalista);
+            var capitalDb = _context.Noticias.Include(n => n.Categoria).Include(n => n.Fotografia).Include(n => n.Jornalista).OrderByDescending(n => n.Data);
             return View(await capitalDb.ToListAsync());
         }
 

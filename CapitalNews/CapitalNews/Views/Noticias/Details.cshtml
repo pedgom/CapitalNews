@@ -14,10 +14,10 @@
     <br />
     <br />
 
-    <h1>Detalhes</h1>
+    <h1></h1>
 
     <div>
-        <h4>Noticia</h4>
+        <h4></h4>
         <hr />
         <div>
         <h4></h4>
@@ -54,7 +54,8 @@
     </div>
 
     <div>
-
+         @if (User.IsInRole("Leitor"))
+                                {
         <h5>Comentários</h5>
 
     <form method="post" asp-action="Comentar">
@@ -89,6 +90,7 @@
                 </tr>
             }
         </table>
+    }
     }
 
     </div>

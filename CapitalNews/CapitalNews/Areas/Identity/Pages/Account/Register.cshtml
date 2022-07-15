@@ -24,20 +24,26 @@
             <hr />
 
             <div class="form-floating">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
                 <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
+            <br />
+            <br />
             <div class="form-floating">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
                 <label asp-for="Input.Password"></label>
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" /> 
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
+            <br />
+            <br />
             <div class="form-floating">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
                 <label asp-for="Input.ConfirmPassword"></label>
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
+            <br />
+            <br />
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Registar</button>
 
         </div>
@@ -46,23 +52,30 @@
             @* dados do novo Leitor *@
 
             <div class="form-floating">
-                <input asp-for="Input.Leitores.Nome" class="form-control" autocomplete="username" aria-required="true" />
                 <label asp-for="Input.Leitores.Nome"></label>
+                <input asp-for="Input.Leitores.Nome" class="form-control" autocomplete="username" aria-required="true" />
+                
                 <span asp-validation-for="Input.Leitores.Nome" class="text-danger"></span>
             </div>
+            <br />
+            <br />
             <div class="form-floating">
-                <input asp-for="Input.Leitores.Datanasc" class="form-control" autocomplete="username" aria-required="true" />
                 <label asp-for="Input.Leitores.Datanasc"></label>
+                <input asp-for="Input.Leitores.Datanasc" class="form-control" autocomplete="username" aria-required="true" /> 
                 <span asp-validation-for="Input.Leitores.Datanasc" class="text-danger"></span>
             </div>
+            <br />
+            <br />
             <div class="form-floating">
-                <input asp-for="Input.Leitores.Sexo" class="form-control" autocomplete="username" aria-required="true" />
                 <label asp-for="Input.Leitores.Sexo"></label>
+                <input asp-for="Input.Leitores.Sexo" class="form-control" autocomplete="username" aria-required="true" />
                 <span asp-validation-for="Input.Leitores.Sexo" class="text-danger"></span>
             </div>
+            <br />
+            
             <div class="form-floating">
-                <input asp-for="Input.Leitores.Username" class="form-control" autocomplete="username" aria-required="true" />
                 <label asp-for="Input.Leitores.Username"></label>
+                <input asp-for="Input.Leitores.Username" class="form-control" autocomplete="username" aria-required="true" />
                 <span asp-validation-for="Input.Leitores.Username" class="text-danger"></span>
             </div>
 
