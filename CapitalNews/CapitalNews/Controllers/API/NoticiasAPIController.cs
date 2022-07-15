@@ -92,10 +92,19 @@ namespace CapitalNews.Controllers.API
         // POST: api/NoticiasAPI
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Noticias>> PostNoticias(Noticias noticias)
+        public async Task<ActionResult<Noticias>> PostNoticias([FromForm] Noticias noticias)
         {
-            _context.Noticias.Add(noticias);
-            await _context.SaveChangesAsync();
+            noticias.FotografiaFK = 1;
+            noticias.JornalistaFK = 1;
+            try
+            {
+                _context.Noticias.Add(noticias);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
 
             return CreatedAtAction("GetNoticias", new { id = noticias.Id }, noticias);
         }
