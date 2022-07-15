@@ -16,10 +16,10 @@
     <br />
     
 
-    <h1><b>Noticias ao Minuto</b></h1>
+    <h1><b>Notícias ao Minuto</b></h1>
     @if (SignInManager.IsSignedIn(User) && User.IsInRole("Jornalista")){
         <p>
-            <a asp-action="Create">Adicionar Noticia</a>
+            <a asp-action="Create">Adicionar Notícia</a>
         </p>
     }
     <table class="table">
