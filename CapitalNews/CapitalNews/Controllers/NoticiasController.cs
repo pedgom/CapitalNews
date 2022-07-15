@@ -163,7 +163,7 @@ namespace CapitalNews.Controllers
 
             var user_id = _userManager.GetUserId(User);
             var leitor = _context.Leitores.FirstOrDefault(x => x.UserID == user_id);
-            noticias.JornalistaFK = leitor.Id;
+            noticias.JornalistaFK = 1;
             noticias.FotografiaFK = fotografia.Id;
             noticias.Fotografia = fotografia;
             if (ModelState.IsValid)
