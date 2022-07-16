@@ -94,8 +94,6 @@ namespace CapitalNews.Controllers.API
         [HttpPost]
         public async Task<ActionResult<Noticias>> PostNoticias([FromForm] Noticias noticias)
         {
-            noticias.FotografiaFK = 1;
-            noticias.JornalistaFK = 1;
             try
             {
                 _context.Noticias.Add(noticias);
