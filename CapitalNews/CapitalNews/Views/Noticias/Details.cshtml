@@ -2,7 +2,7 @@
 
 @{
 
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = @Html.DisplayFor(model => model.Titulo);
 }
 
 
@@ -52,19 +52,24 @@
         </tr>
     </div>
     </div>
-
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <div>
          @if (User.IsInRole("Leitor"))
                                 {
-        <h5>Comentários</h5>
+        <h2 style="font-size:50px; font-weight:bolder">Comentários</h2>
 
     <form method="post" asp-action="Comentar">
         <input type="hidden" name="id" value="@Model.Id" />
-        <div class="form-group">
+        <div class="form-group" >
             <input name="comentario" class="form-control" />
         </div>
+        <br />
         <div class="form-group">
-            <input type="submit" value="Comentar" class="btn btn-primary" />
+            <input type="submit" value="Comentar" class="btn btn-primary"  />
         </div>
     </form>
 
@@ -81,10 +86,10 @@
             @foreach (var comentario in Model.ListaComentarios.Reverse())
             {
                 <tr>
-                    
+                    <td style="font-weight:bolder">@comentario.Leitor.Username</td>
                     <td>@comentario.TextoComentario</td>
                     <td>@comentario.DataComentario</td>
-                    <td>@comentario.Leitor.Username</td>
+                    
                     
                     <td></td>
                 </tr>
